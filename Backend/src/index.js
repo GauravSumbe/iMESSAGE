@@ -22,9 +22,9 @@ dotenv.config();
 app.use(express.json());
 app.use(clerkMiddleware());
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hello World!');
+// });
 
 app.get('/health', (req, res) => {
     res.status(200).json({ message: 'Server is healthy' });

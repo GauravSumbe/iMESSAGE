@@ -1,7 +1,6 @@
-const{ CronJob } = require("cron");
+const { CronJob } = require("cron");
 const http = require("node:http");
 const https = require("node:https");
-
 
 // every 14 minutes send a GET request to the health endpoint
 const job = new CronJob("*/14 * * * *", function () {
@@ -18,4 +17,4 @@ const job = new CronJob("*/14 * * * *", function () {
     .on("error", (e) => console.error("Error while sending request", e));
 });
 
-export default job;
+module.exports = job;

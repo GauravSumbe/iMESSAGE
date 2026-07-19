@@ -8,7 +8,7 @@ const { clerkMiddleware } = require('@clerk/express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
-const { default: job } = require('./lib/cron');
+const job = require('./lib/cron');
 
 const app = express();
 

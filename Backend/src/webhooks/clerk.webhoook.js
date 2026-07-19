@@ -1,14 +1,15 @@
 const express = require('express');
 const User = require('../models/user.model');
-const verifyWebhook = require('@clerk/backend/webhooks');
+const { verifyWebhook } = require('@clerk/backend/webhooks');
 
 const router = express.Router();
 
 router.post('/', async (req, res) => {
     try {
-        const signingSecret = process.env.CLERK_SIGNING_SECRET;
+        const signingSecret = process.env.CLERK_WEBHOOK_SIGNING_SECRET || process.env.CLERK_SIGNING_SECRET;
 
         if (!signingSecret) {
+            console.error('Clerk webhook signing secret is missing. Set CLERK_WEBHOOK_SIGNING_SECRET.');
             return res.status(503).json({ message: 'Webhook signing secret is not provided' });
             return;
         }

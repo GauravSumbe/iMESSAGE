@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('./models/user.model');
+const User = require('../models/user.model');
 const verifyWebhook = require('@clerk/backend/webhooks');
 
 const router = express.Router();

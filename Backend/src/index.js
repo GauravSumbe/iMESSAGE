@@ -9,6 +9,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const job = require('./lib/cron');
+const clerkwebhook = require('./webhooks/clerk.webhoook');
 
 const app = express();
 
@@ -17,6 +18,8 @@ const PORT = process.env.PORT || 3000;
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 const publicDir = path.join(process.cwd(), 'public');
+
+app.use("/api/webhooks/clerk",express.raw({type: "application/json"}), clerkwebhook);
 
 app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 dotenv.config();
@@ -45,13 +48,6 @@ if (fs.existsSync(publicDir)) {
     });
 
 };
-
-
-
-
-
-
-
 
 
 

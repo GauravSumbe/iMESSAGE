@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
 
-    clerkID : {
+    clerkId : {
         type: String,
         required: true,
         unique: true,

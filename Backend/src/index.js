@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const job = require('./lib/cron');
 const clerkwebhook = require('./webhooks/clerk.webhoook');
+const authRoutes = require('./routes/auth.route');
 
 const app = express();
 
@@ -34,6 +35,8 @@ app.get('/health', (req, res) => {
     res.status(200).json({ message: 'Server is healthy' });
     res.send('Hello World!');
 });
+
+app.use('/api/routes',authRoutes);
 
 if (fs.existsSync(publicDir)) {
     app.use(express.static(publicDir));

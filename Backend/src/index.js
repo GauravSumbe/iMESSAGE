@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 
+dotenv.config();
+
 const User = require('./models/user.model');
 const Message = require('./models/message.model');
 const { connectDB } = require('./lib/db');
@@ -11,6 +13,7 @@ const path = require('path');
 const job = require('./lib/cron');
 const clerkwebhook = require('./webhooks/clerk.webhoook');
 const authRoutes = require('./routes/auth.route');
+const messageRoutes = require('./routes/message.route');
 
 const app = express();
 
@@ -37,6 +40,7 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api/routes',authRoutes);
+app.use('/api/messages',messageRoutes);
 
 if (fs.existsSync(publicDir)) {
     app.use(express.static(publicDir));

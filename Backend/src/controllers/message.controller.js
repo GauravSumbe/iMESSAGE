@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const Message = require('../models/message.model');
 
 const {hasImageKitConfig, uploadChatMedia} = require('../lib/imagekit');
+const { getReceiverSocketId, io } = require('../lib/socket');
 
 
 const getUsersForSidebar = async (req, res ) => {
@@ -97,11 +98,11 @@ const sendMessage = async (req, res) => {
 
     await newMessage.save();
 
-    // const receiverSocketId = getReceiverSocketId(receiverId);
-   
-    // if (receiverSocketId) {
-    //   io.to(receiverSocketId).emit("newMessage", newMessage);
-    // }
+    const receiverSocketId = getReceiverSocketId(receiverId);
+   // only send the message in realtime if user is online
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
 
     res.status(201).json(newMessage);
   } catch (error) {

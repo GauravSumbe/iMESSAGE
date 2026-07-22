@@ -14,8 +14,9 @@ const job = require('./lib/cron');
 const clerkwebhook = require('./webhooks/clerk.webhoook');
 const authRoutes = require('./routes/auth.route');
 const messageRoutes = require('./routes/message.route');
+const { app, server } = require('./lib/socket');
 
-const app = express();
+ 
 
 const DB_URL = process.env.DB_URL;
 const PORT = process.env.PORT || 3000;
@@ -60,7 +61,7 @@ if (fs.existsSync(publicDir)) {
 
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     connectDB();
     console.log(`Server is running on port ${PORT}`);
 

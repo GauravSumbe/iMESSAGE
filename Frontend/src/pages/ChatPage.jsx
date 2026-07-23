@@ -1,9 +1,8 @@
-import React from 'react'
-
+import React from 'react' 
 const ChatPage = () => {
   return (
     <div>
-      chat page
+      chat page 
     </div>
   )
 }

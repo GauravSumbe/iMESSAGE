@@ -40,7 +40,7 @@ app.get('/health', (req, res) => {
     res.send('Hello World!');
 });
 
-app.use('/api/routes',authRoutes);
+app.use('/api/auth',authRoutes);
 app.use('/api/messages',messageRoutes);
 
 if (fs.existsSync(publicDir)) {
